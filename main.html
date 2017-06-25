@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>나이스페이지 - 메인</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/modern-business.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    
+    <style type="text/css">
+
+        html,body {
+        	height:100%;
+        		background:center no-repeat fixed url('/bg');
+        		background-size: cover;
+
+            color:#444;
+            font-family: 'Questrial', sans-serif;
+        }
+
+
+        #photo {  width: 0; height: 0; }
+
+        /* 화면 전체를 어둡게.. */
+        /*.wrap-loading {position: fixed;left:0;right:0;top:0;bottom:0;background: rgba(0,0,0,0.2);filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#20000000', endColorstr='#20000000');        }
+        .wrap-loading div { position: fixed;top: 50%;left: 50%;margin-left: -100px;margin-top: -21px;}*/
+
+        .wrap-loading {left:0;right:0;top:0;bottom:0;background: rgba(0,0,0,0.2);filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#20000000', endColorstr='#20000000');        }
+        .wrap-loading div { position: absolute;top: 200px;left: 50%;margin-left: -100px;margin-top: -21px;}
+
+
+        .wrap-common-loading div {position:absolute;left:50%;top:50%;width:200px;height:200px;margin:-20px 0 0 -20px;}
+        .wrap-loading img { border-radius: 10px;}
+        .display-none {display: none;}
+
+        .thumblist{padding:1px 1px;margin:0 auto}
+        .thumblist:after{display:block;content:'';clear:both}
+        .thumblist li{list-style:none;overflow:hidden;float:left;width:19.9%;font-size:0}
+
+        .thumblist li a{display:block;padding:0 5%}
+        .thumblist li a img{width:100%;height:auto;border:2px solid transparent;border-radius:10px;}
+        .thumblist li.on img{border-color:#0a58f0}
+
+        .previewimage-container {position: relative;}
+        .previewthumnail-container{position:relative}
+
+        .addBtn{position:absolute;left:0;top:80%;width:50%;text-align:center;font-size:14px}
+        .addBtn>a:link,.addBtn>a:visited,.delBtn>a:link,.delBtn>a:visited{color:#fff;padding:2px;text-align:center;text-decoration:none;display:inline-block;font-weight:700}
+        .preview-image{width:100%;height:auto;padding:1px;margin:2px;border-style:dashed;border-color:#960;border-width:1px;border-radius:10px}
+        .del-photo{width:50px;height:50px;border:none;display:inline-block}
+
+        .zoomInBtn{position:absolute;left:81%;top:2%;text-align:left}
+        .zoomIn-icon{width:50px;height:50px;border:none;display:inline-block;border-radius:50%}
+        .delBtn{position:absolute;left:5%;top:10%;text-align:left;font-size:14px}
+
+        .inputTextPhotoAreaDiv{position:absolute;left:2%;top:12%;text-align:left;padding:1px 1px 1px 1px; background: #000000; background:rgba(0, 0, 0, 0.3);border-radius:5px; width:98%}
+        .displayTextPhotoAreaDiv{position:absolute;left:2%;top:20%;font-size:24px;text-align:center;padding:1px 1px 1px 1px; text-shadow: 1px 1px 1px #5D5D5D; background: #000000; background:rgba(0, 0, 0, 0.0);border-radius:5px; width:98%}
+        .photoConfigDiv{position:absolute;left:2%;top:66%;text-align:center;padding:4px 4px 4px 4px; background: #000000; background:rgba(0, 0, 0, 0.0);border-radius:5px; width:98%}
+
+        .text-icon{width:50px;height:50px;border:none;display:inline-block}
+        .btnUrl-icon{width:50px;height:50px;border:none;display:inline-block}
+        .url-icon{width:50px;height:50px;border:none;display:inline-block}
+        .effect-icon{width:50px;height:50px;border:none;display:inline-block}
+        .prt-icon{width:50px;height:50px;border:none;display:inline-block}
+
+        .delBtnNew{position:absolute;width:98%;left:2%;top:88%; text-align:center;}
+
+        .moviconBtn{position:absolute;left:20%;top:20%;text-align:center;vertical-align:middle;display:table-cell;opacity:.7}
+        .movicon{width:40px;height:40px;border:none;display:inline-block;border-radius:50%}
+        .card_num{position:absolute;display:table;left:20px;top:20px;}
+        .card_num span{display:table-cell;vertical-align:middle;text-align:center}
+
+        .photo-input-text {
+            background-color:transparent;
+            color: #FFFFFF;
+            border: none;
+            border-bottom: 1px solid #FFFFFF;
+            width: 98%;
+        }
+        .photo-input-text:focus {
+            border: 1px solid #939393;
+            background-color: #2b2a2d;
+            color : #FFFFFF;
+            width: 98%;
+        }
+
+        .photoDel-Link {
+            /*position: absolute;*/
+            left: 30%;
+            bottom: 20px;
+            width: 400px;
+            padding: 10px 40px;
+            /*margin-left: -15px;*/
+            border: 1px solid #fff;
+            color: #fff;
+            font-size: 16px;
+            text-decoration: none;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: 3;
+            border-radius: 8px 8px 8px 8px;
+        }
+        a.photoDel-Link:hover { text-decoration:none; color: #fff; }
+        a.photoDel-Link:visited { text-decoration:none; color: #fff; }
+        a.photoDel-Link:active { text-decoration:none; color: #fff; }
+
+        #makeModal{overflow-y:auto;}
+
+        .ad-messageArea {
+            position: absolute;
+            left: 5%;
+            top: 85%;
+            text-align: left
+        }
+
+        .ad-message {
+            color: #FFFFFF;
+            /*font-size: 12px;*/
+            display: inline-block
+        }
+
+        .ad-quitLink {
+            position: absolute;
+            left: 50%;
+            bottom: 10px;
+            width: 170px;
+            padding: 10px 0;
+            margin-left: -85px;
+            border: 1px solid #fff;
+            color: #fff;
+            font-size: 16px;
+            text-decoration: none;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: 3;
+            border-radius: 4px 4px 4px 4px
+        }
+
+        button.btn_comm{padding:0;margin:0;border:0;background:0; cursor:pointer}
+        button.btn_comm:focus,a:focus{outline:0}
+        .btn_close{position:absolute;right:20px;top:60px;width:25px;height:25px;background:url("../img/bt_preview_close.png") no-repeat !important;background-size:auto 100% !important;z-index:10}
+
+        a.ad-quitLink:hover { text-decoration:none; color: #ffa; }
+        a.ad-quitLink:visited { text-decoration:none; color: #ffb; }
+        a.ad-quitLink:active { text-decoration:none; color: #ffB; }
+
+    </style>
+
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">나이스페이지</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="about.html">About</a>
+                    </li>
+                    <li>
+                        <a href="services.html">Services</a>
+                    </li>
+                    <li class="active">
+                        <a href="contact.html">Contact</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Portfolio <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="portfolio-1-col.html">1 Column Portfolio</a>
+                            </li>
+                            <li>
+                                <a href="portfolio-2-col.html">2 Column Portfolio</a>
+                            </li>
+                            <li>
+                                <a href="portfolio-3-col.html">3 Column Portfolio</a>
+                            </li>
+                            <li>
+                                <a href="portfolio-4-col.html">4 Column Portfolio</a>
+                            </li>
+                            <li>
+                                <a href="portfolio-item.html">Single Portfolio Item</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Blog <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="blog-home-1.html">Blog Home 1</a>
+                            </li>
+                            <li>
+                                <a href="blog-home-2.html">Blog Home 2</a>
+                            </li>
+                            <li>
+                                <a href="blog-post.html">Blog Post</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Other Pages <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="full-width.html">Full Width Page</a>
+                            </li>
+                            <li>
+                                <a href="sidebar.html">Sidebar Page</a>
+                            </li>
+                            <li>
+                                <a href="faq.html">FAQ</a>
+                            </li>
+                            <li>
+                                <a href="404.html">404</a>
+                            </li>
+                            <li>
+                                <a href="pricing.html">Pricing Table</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Page Heading/Breadcrumbs -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">안성집
+                    <small>요식업체</small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="index.html">Home</a>
+                    </li>
+                    <li class="active">Portfolio Item</li>
+                </ol>
+            </div>
+        </div>
+        <!-- /.row -->
+
+
+        <div class="row">
+            <div class="col-lg-12">
+
+
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">상단 제목</h4>
+                    </div>
+                    <div class="modal-body">
+                        <a href="#">                
+                                    <img class="img-responsive img-hover img-related"  src="http://placehold.it/500x700" width="100%" alt="">                    
+                        </a>
+
+                        <div class="form-group" style="text-align:left;">
+                            <ul id="thumblist606" class="thumblist ui-sortable">
+                                <li id="thumbnailItem2378" class="ui-sortable-handle">
+                                    <div class="previewthumnail-container"><a href="javascript:;"><img class="" name="thumbnailImg2378" id="thumbnailImg2378" src="https://rgo.to/_rgo/nchime2/1/page_image/th_1488926451578-323.jpg" onerror="this.src='/images/empty-thumnail.png';" onclick="setPreviewInfo(606, 2378)"></a>
+                                    </div>
+                                </li>
+                                <li id="thumbnailItem2312" class="ui-sortable-handle">
+                                    <div class="previewthumnail-container"><a href="javascript:;"><img class="" name="thumbnailImg2312" id="thumbnailImg2312" src="https://rgo.to/_rgo/nchime2/1/page_image/th_1488273470151-686.jpg" onerror="this.src='/images/empty-thumnail.png';" onclick="setPreviewInfo(606, 2312)"></a>
+                                    </div>
+                                </li>
+                                <li id="thumbnailItem1687" class="ui-sortable-handle">
+                                    <div class="previewthumnail-container"><a href="javascript:;"><img class="" name="thumbnailImg1687" id="thumbnailImg1687" src="https://rgo.to/_rgo/nchime2/1/page_image/th_1486048200024-433.jpeg" onerror="this.src='/images/empty-thumnail.png';" onclick="setPreviewInfo(606, 1687)"></a>
+                                    </div>
+                                </li>
+                                <li id="thumbnailItem2082" class="ui-sortable-handle on">
+                                    <div class="previewthumnail-container"><a href="javascript:;"><img class="" name="thumbnailImg2082" id="thumbnailImg2082" src="https://rgo.to/_rgo/nchime2/1/page_image/th_1487241371798-819.JPG" onerror="this.src='/images/empty-thumnail.png';" onclick="setPreviewInfo(606, 2082)"></a>
+                                    </div>
+                                </li>
+                                <li id="thumbnailItem2313" class="ui-sortable-handle">
+                                    <div class="previewthumnail-container"><a href="javascript:;"><img class="" name="thumbnailImg2313" id="thumbnailImg2313" src="https://rgo.to/_rgo/nchime2/1/page_image/th_1488273529021-406.jpg" onerror="this.src='/images/empty-thumnail.png';" onclick="setPreviewInfo(606, 2313)"></a>
+                            </ul>
+                            </div>
+
+
+
+
+                        </div>
+
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>-->
+                        하단 메뉴
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+
+
+
+        <hr>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Your Website 2014</p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
